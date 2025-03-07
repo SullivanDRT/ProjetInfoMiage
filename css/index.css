@@ -11,5 +11,5 @@ body {
   justify-content: center;
   overflow: hidden;
   height: 100vh;
-  background: linear-gradient(0deg, rgb(141, 165, 243) 0%, rgb(151, 172, 240) 100%);
+  background: white;
 }

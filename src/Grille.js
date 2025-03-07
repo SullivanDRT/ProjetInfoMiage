@@ -5,13 +5,13 @@ export default class Grille {
     this.temperature.src = "../images/temperature.png";
 
     this.viscosite = new Image();
-    this.viscosite.src = "../images/viscocite.png";
+    this.viscosite.src = "../images/rayon-de-miel.png";
 
     this.mur = new Image();
     this.mur.src = "../images/mur.png";
-
+  
     this.caseVide = new Image();
-    this.caseVide.src = "../images/case.png";
+    this.caseVide.src = "../images/map/color.png";
   }
   map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -19,7 +19,7 @@ export default class Grille {
     [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -35,11 +35,14 @@ export default class Grille {
         if (tile === 1) {
           definitionCase = this.mur;
         }
-        if (tile === 0) {
-          definitionCase = this.caseVide;
-        }
-        if (tile === 2) {
+        if (tile === 2) { 
           definitionCase = this.temperature;
+        }
+        if(tile === 3){
+          definitionCase = this.viscosite;
+        }
+        if(tile === 0){
+          definitionCase = this.caseVide;
         }
         this.#dessinerCase(ctx, colonne, ligne, this.tailleGrille, definitionCase);
       }
