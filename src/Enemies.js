@@ -15,10 +15,12 @@ export default class Enemie {
     this.directionTempsParDefaut = this.#random(15, 50);
     this.directionTemps = this.directionTempsParDefaut;
   }
-  draw(ctx) {
-    this.#move();
-    this.#changeDirection();
-    console.log("Données", this.x, this.y);
+  draw(ctx, pause) {
+    if (!pause) {
+      this.#move();
+      this.#changeDirection();
+      console.log("Données", this.x, this.y);
+    }
     ctx.drawImage(
       this.image,
       this.x,
@@ -26,6 +28,18 @@ export default class Enemie {
       this.tailleGrille,
       this.tailleGrille
     );
+  }
+  CollisionAvecChimiste(chimsite) {
+    const taille = this.tailleGrille / 2;
+    if (
+      this.x < chimsite.x + taille &&
+      this.x + taille> chimsite.x &&
+      this.y < chimsite.y + taille &&
+      this.y + taille > chimsite.y
+    ) {
+      return true;
+    }
+    return false;
   }
   #move() {
     if (

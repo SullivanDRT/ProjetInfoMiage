@@ -8,12 +8,36 @@ const rapiditerEnemie = 2;
 const grille = new Grille(tailleGrille);
 const chimsite = grille.getChimiste(rapiditer);
 const enemies = grille.getEnemies(rapiditerEnemie);
+
+const gameOverSong = new Audio("../songs/gameOver.mp3");
+let gameOver = false;
+
 function gameLoop() {
   grille.draw(ctx);
-  chimsite.draw(ctx);
-  enemies.forEach((enemie) => enemie.draw(ctx));
+  chimsite.draw(ctx, pause());
+  enemies.forEach((enemie) => enemie.draw(ctx, pause()));
+  if (checkGameOver()) {
+    return;
+  }
 }
 
 grille.setCanvasTaille(canvas);
 
 setInterval(gameLoop, 1000 / 75);
+
+function pause() {
+  return !chimsite.premierMouvement || gameOver;
+}
+
+function checkGameOver() {
+  if (!gameOver) {
+    gameOver = estPerdu();
+  }
+  if (gameOver) {
+    // gameOverSong.play();
+  }
+}
+
+function estPerdu() {
+  return enemies.some((enemie) => enemie.CollisionAvecChimiste(chimsite));
+}
