@@ -12,12 +12,23 @@ const enemies = grille.getEnemies(rapiditerEnemie);
 const gameOverSong = new Audio("../songs/gameOver.mp3");
 let gameOver = false;
 
+let temps = 300;
+
+let affichage = document.getElementById("affichage");
+
+let chronoLance = false;
+let chrono;
+
 function gameLoop() {
   grille.draw(ctx);
   chimsite.draw(ctx, pause());
   enemies.forEach((enemie) => enemie.draw(ctx, pause()));
   if (checkGameOver()) {
     return;
+  }
+  if (!chronoLance && chimsite.premierMouvement) {
+    chronoLance = true;
+    chrono = setInterval(decremente, 1000);
   }
 }
 
@@ -40,4 +51,9 @@ function checkGameOver() {
 
 function estPerdu() {
   return enemies.some((enemie) => enemie.CollisionAvecChimiste(chimsite));
+}
+
+function decremente() {
+  temps--;
+  affichage.innerHTML = temps;
 }
