@@ -5,13 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape Game Pacman</title>
     <link rel="stylesheet" href="css/index.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
+  <header></header>
   <body>
-    <p>Temps Restants : <strong id="affichage">300</strong> secondes</p>
-    <div>
-      <h1>Escape Game Pacman</h1>
+    <header>
+      <h1>Jeux Pac-Man</h1>
+      <p>Temps Restants : <strong id="affichage">300</strong> secondes</p>
+    </header>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#popUpDefaite">
+    Launch demo modal
+  </button>
+    <div id="jeu">
       <canvas id="gameCanvas"></canvas>
     </div>
     <script src="src/Jeu.js" type="module"></script>
   </body>
 </html>
+
+  <!-- Pop up victoire -->
+  <div class="modal fade" id="popUpVictoire" tabindex="-1" role="dialog" aria-labelledby="titre" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="titre">Victoire ! 🥳</h5>
+          </button>
+        </div>
+        <div class="modal-body">
+            Vous avez réussi à stabiliser votre produit !
+            Félicitations ! 🎊
+        </div>
+        <div class="modal-footer">
+            <a href="index.html">Retour Menu</a>
+          <button type="button" class="btn btn-primary">Prochaine étape</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Pop up défaite -->
+    <div class="modal fade" id="popUpDefaite" tabindex="-1" role="dialog" aria-labelledby="titre" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="titre">Défaite... 😞</h5>
+              </button>
+            </div>
+            <div class="modal-body">
+                Votre produit a subi un changement de couleur, ce qui a entrainé une instabillité du produit.
+            </div>
+            <div class="modal-footer">
+                <a href="index.html">Retour Menu</a>
+                <a href="Jeux.html" class="btn btn-primary">Réessayer</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<script>
+    function afficherVictoire(){
+        $('#popUpVictoire').modal('show');
+    }
+    function afficherDefaite(){
+        $('#popUpDefaite').modal('show');
+    }
+</script>

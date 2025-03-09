@@ -12,10 +12,10 @@ export default class Grille {
     this.viscosite.src = "../images/rayon-de-miel.png";
 
     this.mur = new Image();
-    this.mur.src = "../images/mur.png";
+    this.mur.src = "../images/mur2.png";
 
     this.caseVide = new Image();
-    this.caseVide.src = "../images/map/color.png";
+    this.caseVide.src = "../images/case2.png";
   }
 
   //1 mur

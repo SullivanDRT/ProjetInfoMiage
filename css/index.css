@@ -1,15 +1,17 @@
 #gameCanvas {
   box-shadow: 10px 10px 20px black;
+  max-width: 100vw;
+  max-height: 100vh;
 }
-h1 {
-  text-align: center;
-  font-family: comic sans MS;
-  color: lightgrey;
-}
-body {
+
+#jeu {
   display: flex;
   justify-content: center;
-  overflow: hidden;
-  height: 100vh;
-  background: #f0f0f0;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #f0f0f0;
 }

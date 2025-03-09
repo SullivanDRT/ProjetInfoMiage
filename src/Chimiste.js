@@ -29,7 +29,7 @@ export default class Chimiste {
   }
   #ChargeImageChimiste() {
     const chimisteImage1 = new Image();
-    chimisteImage1.src = "../images/chimiste3.png";
+    chimisteImage1.src = "../images/personnage2.png";
     // le reste des images
     this.packChimisteImage = [chimisteImage1];
 

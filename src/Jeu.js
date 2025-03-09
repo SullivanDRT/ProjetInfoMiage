@@ -10,7 +10,9 @@ const chimsite = grille.getChimiste(rapiditer);
 const enemies = grille.getEnemies(rapiditerEnemie);
 
 const gameOverSong = new Audio("../songs/gameOver.mp3");
+let joueUneFoisStp = false;
 let gameOver = false;
+let gameWin = false;
 
 let temps = 300;
 
@@ -30,6 +32,7 @@ function gameLoop() {
     chronoLance = true;
     chrono = setInterval(decremente, 1000);
   }
+  checkWin();
 }
 
 grille.setCanvasTaille(canvas);
@@ -37,7 +40,7 @@ grille.setCanvasTaille(canvas);
 setInterval(gameLoop, 1000 / 75);
 
 function pause() {
-  return !chimsite.premierMouvement || gameOver;
+  return !chimsite.premierMouvement || gameOver || gameWin;
 }
 
 function checkGameOver() {
@@ -45,7 +48,18 @@ function checkGameOver() {
     gameOver = estPerdu();
   }
   if (gameOver) {
-    // gameOverSong.play();
+    if (!joueUneFoisStp) {
+      joueUneFoisStp = true;
+      gameOverSong.play();
+    }
+    afficherDefaite();
+  }
+}
+
+function checkWin() {
+  if (temps == 0) {
+    gameWin = true;
+    afficherVictoire();
   }
 }
 
