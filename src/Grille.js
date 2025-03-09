@@ -1,12 +1,13 @@
 import Chimiste from "./Chimiste.js";
 import Enemie from "./Enemies.js";
 import MouvementDirection from "./MouvementDirection.js";
+import Temperature from "./Temperature.js";
 
 export default class Grille {
   constructor(tailleGrille) {
     this.tailleGrille = tailleGrille;
     this.temperature = new Image();
-    this.temperature.src = "../images/temperature.png";
+    this.temperature.src = "../images/logoTemperature.png";
 
     this.viscosite = new Image();
     this.viscosite.src = "../images/rayon-de-miel.png";
@@ -29,13 +30,13 @@ export default class Grille {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 1, 4, 0, 0, 1, 0, 0, 0, 1],
     [1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
-    [1, 0, 6, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 6, 0, 0, 0, 0, 0, 0, 1, 6, 1],
     [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
     [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
     [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
     [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],
+    [1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 2, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
@@ -117,6 +118,24 @@ export default class Grille {
     }
     return enemies;
 
+  }
+  getTemperature(){
+    const temperature = [];
+    for (let ligne = 0; ligne < this.map.length; ligne++) {
+      for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
+        let tile = this.map[ligne][colonne];
+        if (tile === 2) {
+          this.map[ligne][colonne] = 0;
+          temperature.push(new Temperature(
+            colonne * this.tailleGrille,
+            ligne * this.tailleGrille,
+            this.tailleGrille,
+            this
+          ));
+        }
+      }
+    }
+    return temperature
   }
   CollisionEnvironnement(x, y, direction) {
     if (

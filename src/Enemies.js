@@ -19,7 +19,6 @@ export default class Enemie {
     if (!pause) {
       this.#move();
       this.#changeDirection();
-      console.log("Données", this.x, this.y);
     }
     ctx.drawImage(
       this.image,
