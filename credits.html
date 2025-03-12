@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crédits</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        color: black;
+        text-align: center;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        color: #013220;
+      }
+      .credits {
+        text-align: left;
+        padding: 10px;
+      }
+      .credit {
+        background: white;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 2px solid gray;
+        transition: transform 0.3s;
+      }
+      .credit:hover {
+        transform: scale(1.05);
+      }
+      .btn-back {
+        display: inline-block;
+        background-color: #013220;
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      .btn-back:hover {
+        background-color: #005f46;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Crédits du Projet</h1>
+      <div class="credits">
+        <div class="credit">
+          <h2>👥 Participants</h2>
+          <p>Le projet a été réalisé par :</p>
+          <ul>
+            <li>Sullivan Demaret</li>
+            <li>Nisrine Abhari</li>
+            <li>Thomas Foucher</li>
+            <li>Zineb Sukiennik</li>
+          </ul>
+        </div>
+        <div class="credit">
+          <h2>🌐 Contexte du Projet</h2>
+          <p>
+            Ce projet fait partie du cadre de Créacosm, une initiative visant à
+            concevoir des applications innovantes. L'objectif de ce projet est
+            de développer une étape interactive d'un escape game.
+          </p>
+          <p>
+            Le but général est de créer une application fonctionnelle qui fait
+            partie d'un réseau de projets pour un escape game, où les joueurs
+            doivent réussir des étapes. L'application communique avec un Backend
+            As A Service (BAAS) pour valider l'avancement et la fin de la
+            partie.
+          </p>
+        </div>
+        <div class="credit">
+          <h2>📅 Le Projet en Deux Temps</h2>
+          <p>Le projet s'est déroulé en deux phases :</p>
+          <h3>Premier Semestre :</h3>
+          <ul>
+            <li>
+              Étude de stabilité du projet, conception d'un modèle
+              entité-association, et définition des requêtes SQL nécessaires.
+            </li>
+            <li>
+              Réalisation d'un prototype papier illustrant le fonctionnement et
+              l'interaction de l'utilisateur avec l'application.
+            </li>
+            <li>
+              Création de fichiers SQL pour construire les tables et insérer des
+              données dans la base PostgreSQL.
+            </li>
+          </ul>
+          <h3>Deuxième Semestre :</h3>
+          <ul>
+            <li>
+              Création de l'application fonctionnelle pour l'étape d'escape
+              game.
+            </li>
+            <li>Déploiement de l'application dans un conteneur Docker.</li>
+            <li>
+              Ajout d'un fichier README.md détaillant la procédure pour lancer
+              l'application.
+            </li>
+            <li>
+              Respect des bonnes pratiques de sécurité en évitant les variables
+              d'environnement en dur et les clés d'authentification dans le
+              frontend.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <a href="index.html" class="btn-back">Retour à l'accueil</a>
+    </div>
+  </body>
+</html>
