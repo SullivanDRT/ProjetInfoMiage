@@ -67,11 +67,16 @@ export default class Chimiste {
     }
   };
 
+  getPositionChimiste(){
+    return [this.y / this.tailleGrille, this.x/this.tailleGrille];
+  }
+
   #mouvement() {
+    const posChimiste = this.getPositionChimiste();
     if (this.mouvementDirectionActuelle !== this.requeteDirectionMouvement) {
       if (
-        Number.isInteger(this.x / this.tailleGrille) &&
-        Number.isInteger(this.y / this.tailleGrille)
+        Number.isInteger(posChimiste[0]) &&
+        Number.isInteger(posChimiste[1])
       ) {
         if (
           !this.grille.CollisionEnvironnement(

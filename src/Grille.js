@@ -1,5 +1,6 @@
 import Chimiste from "./Chimiste.js";
-import Enemie from "./Enemies.js";
+import ChangementCouleur from "./ChangementCouleur.js";
+import Dephasage from "./Dephasage.js";
 import MouvementDirection from "./MouvementDirection.js";
 import Temperature from "./Temperature.js";
 
@@ -17,6 +18,8 @@ export default class Grille {
 
     this.caseVide = new Image();
     this.caseVide.src = "../images/case2.png";
+
+    this.chimiste = null;
   }
 
   //1 mur
@@ -30,7 +33,7 @@ export default class Grille {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 1, 4, 0, 0, 1, 0, 0, 0, 1],
     [1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
-    [1, 0, 6, 0, 0, 0, 0, 0, 0, 1, 6, 1],
+    [1, 0, 6, 0, 7, 0, 0, 0, 0, 1, 6, 1],
     [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
     [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
     [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
@@ -83,21 +86,24 @@ export default class Grille {
     canvas.height = this.map.length * this.tailleGrille;
   }
   getChimiste(rapiditer) {
-    for (let ligne = 0; ligne < this.map.length; ligne++) {
-      for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
-        let tile = this.map[ligne][colonne];
-        if (tile === 4) {
-          this.map[ligne][colonne] = 0;
-          return new Chimiste(
-            colonne * this.tailleGrille,
-            ligne * this.tailleGrille,
-            this.tailleGrille,
-            rapiditer,
-            this
-          );
+    if(this.chimiste === null) {
+      for (let ligne = 0; ligne < this.map.length; ligne++) {
+        for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
+          let tile = this.map[ligne][colonne];
+          if (tile === 4) {
+            this.map[ligne][colonne] = 0;
+            this.chimiste =  new Chimiste(
+              colonne * this.tailleGrille,
+              ligne * this.tailleGrille,
+              this.tailleGrille,
+              rapiditer,
+              this
+            );
+          }
         }
       }
     }
+    return this.chimiste;
   }
   getEnemies(rapiditer){
     const enemies = [];
@@ -106,7 +112,17 @@ export default class Grille {
         let tile = this.map[ligne][colonne];
         if (tile === 6) {
           this.map[ligne][colonne] = 0;
-          enemies.push(new Enemie(
+          enemies.push(new ChangementCouleur(
+            colonne * this.tailleGrille,
+            ligne * this.tailleGrille,
+            this.tailleGrille,
+            rapiditer,
+            this
+          ));
+        }
+        if (tile === 7) {
+          this.map[ligne][colonne] = 0;
+          enemies.push(new Dephasage(
             colonne * this.tailleGrille,
             ligne * this.tailleGrille,
             this.tailleGrille,

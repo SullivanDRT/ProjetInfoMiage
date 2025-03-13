@@ -1,6 +1,6 @@
 import MouvementDirection from "./MouvementDirection.js";
 
-export default class Enemie {
+export default class ChangementCouleur {
   constructor(x, y, tailleGrille, rapiditer, grilleMap) {
     this.x = x;
     this.y = y;
@@ -64,6 +64,8 @@ export default class Enemie {
       }
     }
   }
+  
+
   #changeDirection() {
     this.directionTemps--;
     let nouvelleDirection = null;
