@@ -22,7 +22,7 @@ let chronoLance = false;
 let chrono;
 
 let progressBar = document.getElementById("progressBar");
-let pourcentage = 0;
+let pourcentage = 30;
 
 function gameLoop() {
   grille.draw(ctx);
@@ -69,18 +69,16 @@ function checkWin() {
 }
 
 function checkItems() {
-    if (temperature.CollisionAvecChimiste(chimsite)) {
-      temperature = null;
-      if (pourcentage < 30) {
-        console.log(pourcentage - temps.points);
-        pourcentage = 0;
-      } else {
-        pourcentage -= temp.points;
-      }
-      return false;
+  if (temperature.CollisionAvecChimiste(chimsite)) {
+    temperature = grille.creerAleatoireTemperature();
+    if (pourcentage < 30) {
+      console.log(pourcentage - temps.points);
+      pourcentage = 0;
+    } else {
+      pourcentage -= 30;
     }
-    return true;
-  };
+  }
+}
 
 function estPerdu() {
   return (
@@ -100,8 +98,8 @@ function miseAJourProgressBar() {
   progressBar.setAttribute(`aria-valuenow`, pourcentage);
 }
 
-function checkReapparitionTemp(){
-  if(temperature === null){
+function checkReapparitionTemp() {
+  if (temperature === null) {
     temperature = grille.creerAleatoireTemperature();
   }
 }

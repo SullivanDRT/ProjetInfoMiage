@@ -1,17 +1,65 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Accueil Pac-man</title>
-    <link rel="stylesheet" href="css/accueil.css" />
-  </head>
-  <body>
+    <title>Accueil - Pac-man</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f0f0, #dfe6e9);
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 320px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            max-width: 180px;
+            margin-bottom: 20px;
+        }
+
+        .card a {
+            display: block;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            margin: 10px 0;
+            padding: 12px;
+            background: #0077b6;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .card a:hover {
+            background: #00a8e8;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
     <div class="card">
-      <img src="logo/logoChimisteAccueil.png" alt="Logo Pac-man" />
-      <a href="Jeux.html">Jouer</a>
-      <a href="regles.html">Règles du Jeu</a>
-      <a href="credits.html">Crédits</a>
+        <img src="logo/logoChimisteAccueil.png" alt="Logo Pac-man" />
+        <a href="Jeux.html">🎮 Jouer</a>
+        <a href="regles.html">📜 Règles du Jeu</a>
+        <a href="credits.html">🎨 Crédits</a>
     </div>
-  </body>
+</body>
 </html>

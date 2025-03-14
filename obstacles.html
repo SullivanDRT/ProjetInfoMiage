@@ -1,86 +1,131 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Obstacles</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color: black;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            color: #013220;
-        }
-        .obstacle {
-            margin: 20px 0;
-            text-align: left;
-        }
-        .centered-text {
-            text-align: center;
-            font-weight: bold;
-        }
-        img {
-            width: 120px;
-            height: auto;
-            display: block;
-            margin: 10px auto;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        .btn-retour {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #013220;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            width: 150px;
-            text-align: center;
-        }
-        .btn-retour:hover {
-            background-color: #025a30;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        color: black;
+        text-align: center;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        color: #013220;
+      }
+      .obstacle {
+        margin: 20px 0;
+        text-align: left;
+      }
+      .centered-text {
+        text-align: center;
+        font-weight: bold;
+      }
+      img {
+        width: 120px;
+        height: auto;
+        display: inline-block;
+        margin: 10px;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      .btn-retour {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #013220;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 150px;
+        text-align: center;
+      }
+      .btn-retour:hover {
+        background-color: #025a30;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>⚠️ Obstacles</h1>
-        <div class="obstacle">
-            <h2 class="centered-text">Ennemi-type n°1</h2>
-            <img src="images/enemie1.png" alt="Ennemi">
-            <p class="centered-text">Les ennemis se déplacent et tentent d'entraver votre progression. Si vous les touchez :</p>
-            <ul>
-                <li>Vous perdez des points.</li>
-                <li>La difficulté peut augmenter (ralentissement, inversion des commandes, etc.).</li>
-                <li>Vous devez les éviter pour atteindre la fin du niveau.</li>
-            </ul>
+      <h1>⚠️ Obstacles</h1>
+      <div class="obstacle">
+        <h2 class="centered-text">Les Ennemis</h2>
+        <p class="centered-text">
+          Les ennemis se déplacent et tentent d'entraver votre progression. Si
+          vous les touchez :
+        </p>
+        <ul>
+          <li>Vous perdez des points.</li>
+          <li>
+            La difficulté peut augmenter (ralentissement, inversion des
+            commandes, etc.).
+          </li>
+          <li>Vous devez les éviter pour atteindre la fin du niveau.</li>
+        </ul>
+      </div>
+      <div class="obstacle">
+        <h2 class="centered-text">Les différentes Altérations</h2>
+        <p class="centered-text">
+          Les obstacles correspondent aux différents changements pouvant
+          affecter la stabilité du produit :
+        </p>
+        <ul>
+          <li>
+            <strong>Déphasage</strong> : séparation des composants du produit.
+          </li>
+          <li>
+            <strong>Changement de couleur</strong> : altération de l'apparence
+            du produit.
+          </li>
+          <li>
+            <strong>Modification de texture</strong> : transformation de l'état
+            physique du produit.
+          </li>
+        </ul>
+        <p class="centered-text">
+          Évitez ces altérations pour maintenir la stabilité et réussir le
+          niveau.
+        </p>
+      </div>
+      <div class="obstacle">
+        <h2 class="centered-text">👾 Palette de couleur</h2>
+        <div style="text-align: center">
+          <img src="images/enemie1.png" alt="Palette de couleur" />
         </div>
-        <div class="obstacle">
-            <h2 class="centered-text">Autres Altérations</h2>
-            <p>Les obstacles correspondent aux différents changements pouvant affecter la stabilité du produit :</p>
-            <ul>
-                <li><strong>Déphasage</strong> : séparation des composants du produit.</li>
-                <li><strong>Changement de couleur</strong> : altération de l'apparence du produit.</li>
-                <li><strong>Modification de texture</strong> : transformation de l'état physique du produit.</li>
-            </ul>
-            <p class="centered-text">Évitez ces altérations pour maintenir la stabilité et réussir le test.</p>
+        <p class="centered-text">
+          Cet ennemi altère la perception visuelle en modifiant les couleurs de
+          l’environnement, rendant les éléments du jeu plus difficiles à
+          identifier.
+        </p>
+      </div>
+
+      <div class="obstacle">
+        <h2 class="centered-text">⚡ Déphasage - Un obstacle plus fort</h2>
+        <div style="text-align: center">
+          <img src="images/dephasage.webp" alt="Déphasage" />
         </div>
-        <a href="regles.html" class="btn-retour">Retour aux règles</a>
+        <p class="centered-text">
+          Le déphasage est un obstacle particulièrement dangereux car il sépare
+          les composants du produit et rend la situation plus instable.
+          Contrairement aux autres altérations, il peut rendre le jeu beaucoup
+          plus difficile, vous forçant à ajuster rapidement votre stratégie pour
+          le surmonter.
+        </p>
+      </div>
+
+      <a href="regles.html" class="btn-retour">Retour aux règles</a>
     </div>
-</body>
+  </body>
 </html>
