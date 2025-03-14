@@ -38,11 +38,10 @@ export default class Grille {
     [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
     [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
     [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 2, 1],
+    [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-]
-
+  ];
 
   draw(ctx) {
     for (let ligne = 0; ligne < this.map.length; ligne++) {
@@ -105,7 +104,7 @@ export default class Grille {
     }
     return this.chimiste;
   }
-  getEnemies(rapiditer){
+  getEnemies(rapiditer) {
     const enemies = [];
     for (let ligne = 0; ligne < this.map.length; ligne++) {
       for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
@@ -129,29 +128,58 @@ export default class Grille {
             rapiditer,
             this
           ));
+
         }
       }
     }
     return enemies;
-
   }
-  getTemperature(){
+  getTemperature() {
     const temperature = [];
     for (let ligne = 0; ligne < this.map.length; ligne++) {
       for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
         let tile = this.map[ligne][colonne];
         if (tile === 2) {
           this.map[ligne][colonne] = 0;
-          temperature.push(new Temperature(
-            colonne * this.tailleGrille,
-            ligne * this.tailleGrille,
-            this.tailleGrille,
-            this
-          ));
+          temperature.push(
+            new Temperature(
+              colonne * this.tailleGrille,
+              ligne * this.tailleGrille,
+              this.tailleGrille,
+              this
+            )
+          );
         }
       }
     }
-    return temperature
+  }
+  creerAleatoireTemperature() {
+    let temperature;
+    let position = this.tirerCaseAleatoire();
+    temperature = new Temperature(
+      position[0] * this.tailleGrille,
+      position[1] * this.tailleGrille,
+      this.tailleGrille,
+      this
+    );
+    return temperature;
+  }
+  tirerCaseAleatoire() {
+    let aleatoireX = Math.floor(Math.random() * this.map.length); // Ligne (Y)
+    let aleatoireY = Math.floor(Math.random() * this.map[aleatoireX].length); // Colonne (X)
+
+    console.log("valX: " + aleatoireX);
+    console.log("valY: " + aleatoireY);
+
+    let tile = this.map[aleatoireX][aleatoireY]; // Correct: [y][x]
+
+    if (tile === 0) {
+      // Vérifie si c'est une case vide
+      console.log("Tile trouvé: " + tile);
+      return [aleatoireY, aleatoireX];
+    } else {
+      return this.tirerCaseAleatoire(); // Recommence si mur
+    }
   }
   CollisionEnvironnement(x, y, direction) {
     if (
@@ -191,5 +219,4 @@ export default class Grille {
     }
     return false;
   }
-
 }

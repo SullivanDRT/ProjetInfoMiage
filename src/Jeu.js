@@ -9,7 +9,7 @@ const grille = new Grille(tailleGrille);
 const chimsite = grille.getChimiste(rapiditer);
 const enemies = grille.getEnemies(rapiditerEnemie);
 const gameOverSong = new Audio("../songs/gameOver.mp3");
-let temperature = grille.getTemperature();
+let temperature = grille.creerAleatoireTemperature();
 let joueUneFoisStp = false;
 let gameOver = false;
 let gameWin = false;
@@ -22,19 +22,20 @@ let chronoLance = false;
 let chrono;
 
 let progressBar = document.getElementById("progressBar");
-let pourcentage = 0;
+let pourcentage = 30;
 
 function gameLoop() {
   grille.draw(ctx);
   chimsite.draw(ctx, pause());
   enemies.forEach((enemie) => enemie.draw(ctx, pause()));
-  temperature.forEach((temperature) => temperature.draw(ctx));
+  temperature.draw(ctx);
   if (!chronoLance && chimsite.premierMouvement) {
     chronoLance = true;
     chrono = setInterval(decremente, 1000);
     setInterval(miseAJourProgressBar, 1000);
   }
   checkItems();
+  checkReapparitionTemp();
   checkGameOver();
   checkWin();
 }
@@ -68,19 +69,15 @@ function checkWin() {
 }
 
 function checkItems() {
-  temperature = temperature.filter((temp) => {
-    if (temp.CollisionAvecChimiste(chimsite)) {
-      if (pourcentage < 30) {
-        console.log(pourcentage - temps.points);
-        pourcentage = 0;
-      }
-      else{
-      pourcentage -= temp.points;
-      }
-      return false;
+  if (temperature.CollisionAvecChimiste(chimsite)) {
+    temperature = grille.creerAleatoireTemperature();
+    if (pourcentage < 30) {
+      console.log(pourcentage - temps.points);
+      pourcentage = 0;
+    } else {
+      pourcentage -= 30;
     }
-    return true;
-  });
+  }
 }
 
 function estPerdu() {
@@ -99,4 +96,10 @@ function miseAJourProgressBar() {
   pourcentage++;
   progressBar.style.height = `${pourcentage}%`;
   progressBar.setAttribute(`aria-valuenow`, pourcentage);
+}
+
+function checkReapparitionTemp() {
+  if (temperature === null) {
+    temperature = grille.creerAleatoireTemperature();
+  }
 }

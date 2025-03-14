@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Règles du Jeu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #013220;
+        }
+        .rules {
+            text-align: left;
+            padding: 10px;
+        }
+        .rule {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 2px solid gray;
+            transition: transform 0.3s;
+        }
+        .rule:hover {
+            transform: scale(1.05);
+        }
+        .rule a {
+            display: block;
+            color: #013220;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .btn-back {
+            display: inline-block;
+            background-color: #013220;
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #005f46;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Règles du Jeu</h1>
+        <div class="rules">
+            <div class="rule">
+                <h2>🎯 Objectif</h2>
+                <p>Survivez en évitant les obstacles et en récupérant les objets essentiels.</p>
+            </div>
+            <div class="rule">
+                <h2>⚠️ Obstacles</h2>
+                <p>Évitez les altérations comme le déphasage, le changement de couleur et la modification de texture.</p>
+                <a href="obstacles.html" target="_blank">En savoir plus sur les obstacles</a>
+            </div>
+            <div class="rule">
+                <h2>🧪 Objets à récupérer</h2>
+                <p>Collectez des items pour stabiliser le produit et progresser dans le jeu.</p>
+                <a href="objets.html" target="_blank">En savoir plus sur les objets</a>
+            </div>
+            <div class="rule">
+                <h2>⏳ Progression</h2>
+                <p>Les niveaux durent environ 2 minutes avec une difficulté croissante.</p>
+            </div>
+        </div>
+        <a href="index.html" class="btn-back">Retour à l'accueil</a>
+    </div>
+</body>
+</html>
