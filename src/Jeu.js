@@ -1,11 +1,45 @@
 import Grille from "./Grille.js";
+import { Facile, Moyen, Difficile } from "./Niveau.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const tailleGrille = 50;
-const rapiditer = 2;
-const rapiditerEnemie = 2;
-const grille = new Grille(tailleGrille);
+let rapiditer = 2;
+let rapiditerEnemie = 1;
+let temps = 0;
+let map = [];
+let rapiditerBarre;
+
+const niveau = localStorage.getItem("difficulter");
+setNiveau(niveau);
+
+function setNiveau(niveau) {
+  switch (niveau) {
+    case "facile":
+      temps = Facile.temps;
+      rapiditer = Facile.rapiditer;
+      rapiditerEnemie = Facile.rapiditerEnemie;
+      map = Facile.map;
+      rapiditerBarre = Facile.rapiditerBarre;
+      break;
+    case "moyen":
+      temps = Moyen.temps;
+      rapiditer = Moyen.rapiditer;
+      rapiditerEnemie = Moyen.rapiditerEnemie;
+      map = Moyen.map;
+      rapiditerBarre = Moyen.rapiditerBarre;
+      break;
+    case "difficile":
+      temps = Difficile.temps;
+      rapiditer = Difficile.rapiditer;
+      rapiditerEnemie = Difficile.rapiditerEnemie;
+      map = Difficile.map;
+      rapiditerBarre = Difficile.rapiditerBarre;
+      break;
+  }
+}
+
+const grille = new Grille(tailleGrille, map);
 const chimsite = grille.getChimiste(rapiditer);
 const enemies = grille.getEnemies(rapiditerEnemie);
 const gameOverSong = new Audio("../songs/gameOver.mp3");
@@ -14,15 +48,13 @@ let joueUneFoisStp = false;
 let gameOver = false;
 let gameWin = false;
 
-let temps = 300;
-
 let affichage = document.getElementById("affichage");
 
 let chronoLance = false;
 let chrono;
 
 let progressBar = document.getElementById("progressBar");
-let pourcentage = 30;
+let pourcentage = 0;
 
 function gameLoop() {
   grille.draw(ctx);
@@ -83,7 +115,7 @@ function checkItems() {
 function estPerdu() {
   return (
     enemies.some((enemie) => enemie.CollisionAvecChimiste(chimsite)) ||
-    pourcentage == 100
+    pourcentage >= 100
   );
 }
 
@@ -93,7 +125,7 @@ function decremente() {
 }
 
 function miseAJourProgressBar() {
-  pourcentage++;
+  pourcentage += rapiditerBarre;
   progressBar.style.height = `${pourcentage}%`;
   progressBar.setAttribute(`aria-valuenow`, pourcentage);
 }

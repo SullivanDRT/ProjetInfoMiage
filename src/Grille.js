@@ -5,7 +5,8 @@ import MouvementDirection from "./MouvementDirection.js";
 import Temperature from "./Temperature.js";
 
 export default class Grille {
-  constructor(tailleGrille) {
+  constructor(tailleGrille, map) {
+    this.map = map;
     this.tailleGrille = tailleGrille;
     this.temperature = new Image();
     this.temperature.src = "../images/logoTemperature.png";
@@ -28,20 +29,6 @@ export default class Grille {
   // 3 viscocite
   // 4 chimiste
   // 6 enemies
-
-  map = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 1, 4, 0, 0, 1, 0, 0, 0, 1],
-    [1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
-    [1, 0, 6, 0, 7, 0, 0, 0, 0, 1, 6, 1],
-    [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-    [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
-    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  ];
 
   draw(ctx) {
     for (let ligne = 0; ligne < this.map.length; ligne++) {
@@ -165,20 +152,19 @@ export default class Grille {
     return temperature;
   }
   tirerCaseAleatoire() {
-    let aleatoireX = Math.floor(Math.random() * this.map.length); // Ligne (Y)
-    let aleatoireY = Math.floor(Math.random() * this.map[aleatoireX].length); // Colonne (X)
+    let aleatoireX = Math.floor(Math.random() * this.map.length);
+    let aleatoireY = Math.floor(Math.random() * this.map[aleatoireX].length);
 
     console.log("valX: " + aleatoireX);
     console.log("valY: " + aleatoireY);
 
-    let tile = this.map[aleatoireX][aleatoireY]; // Correct: [y][x]
+    let tile = this.map[aleatoireX][aleatoireY];
 
     if (tile === 0) {
-      // Vérifie si c'est une case vide
       console.log("Tile trouvé: " + tile);
       return [aleatoireY, aleatoireX];
     } else {
-      return this.tirerCaseAleatoire(); // Recommence si mur
+      return this.tirerCaseAleatoire();
     }
   }
   CollisionEnvironnement(x, y, direction) {
