@@ -52,6 +52,7 @@ let affichage = document.getElementById("affichage");
 
 let chronoLance = false;
 let chrono;
+let temperatureBar
 
 let progressBar = document.getElementById("progressBar");
 let pourcentage = 0;
@@ -64,7 +65,7 @@ function gameLoop() {
   if (!chronoLance && chimsite.premierMouvement) {
     chronoLance = true;
     chrono = setInterval(decremente, 1000);
-    setInterval(miseAJourProgressBar, 1000);
+    temperatureBar = setInterval(miseAJourProgressBar, 1000);
   }
   checkItems();
   checkReapparitionTemp();
@@ -89,6 +90,8 @@ function checkGameOver() {
       joueUneFoisStp = true;
       gameOverSong.play();
     }
+    clearInterval(chrono);
+    clearInterval(temperatureBar);
     afficherDefaite();
   }
 }
@@ -96,6 +99,8 @@ function checkGameOver() {
 function checkWin() {
   if (temps == 0) {
     gameWin = true;
+    clearInterval(chrono);
+    clearInterval(temperatureBar);
     afficherVictoire();
   }
 }
