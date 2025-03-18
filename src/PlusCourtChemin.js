@@ -1,32 +1,32 @@
 
 
-export function getVoisins(map,x, y) {
+export function getVoisins(map,x, y, valMur = 1) {
     let voisins = [];
     let positionVoisin;
     if( x !== map.length) {
          positionVoisin = [x + 1, y];
-        if (map[positionVoisin[0]][positionVoisin[1] ] !== 1){
+        if (map[positionVoisin[0]][positionVoisin[1] ] !== valMur){
             voisins.push(positionVoisin);
         }
 
     }
     if( x !== 0) {
          positionVoisin = [x - 1, y];
-        if (map[positionVoisin[0]][positionVoisin[1] ] !== 1){
+        if (map[positionVoisin[0]][positionVoisin[1] ] !== valMur){
             voisins.push(positionVoisin);
         }
 
     }
     if( y !== map.length) {
          positionVoisin = [x, y + 1];
-        if (map[positionVoisin[0]][positionVoisin[1] ] !== 1){
+        if (map[positionVoisin[0]][positionVoisin[1] ] !== valMur){
             voisins.push(positionVoisin);
         }
 
     }
     if( y !== 0) {
          positionVoisin = [x, y - 1];
-        if (map[positionVoisin[0]][positionVoisin[1] ] !== 1){
+        if (map[positionVoisin[0]][positionVoisin[1] ] !== valMur){
             voisins.push(positionVoisin);
         }
 
