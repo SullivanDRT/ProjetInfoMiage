@@ -83,38 +83,53 @@ export default class Dephasage {
     // creation de la matrice innondation
     let liste = [positionArrive];
     let positionDepart = [this.y / this.tailleGrille, this.x / this.tailleGrille];
-    let calque = PlusCourtChemin.creationCalque(this.grilleMap.map, positionArrive);
+    let calque = PlusCourtChemin.creationCalque(this.grilleMap.map, positionDepart);
     if (calque[positionArrive[0]][positionArrive[1]] === -1){
       return [];
     }
-    while (positionArrive !== positionDepart) {
+    while (calque[positionArrive[0]][positionArrive[1]] !== 0) {
       let posMini = positionArrive;
-      let voisins = PlusCourtChemin.getVoisins(calque, positionArrive[0], positionArrive[1]);
+      let voisins = PlusCourtChemin.getVoisins(calque, positionArrive[0], positionArrive[1], -1);
       for (let voisin of voisins) {
-        if (calque[voisin[0]][voisin[1]] + 1 == calque[voisin[0]][voisin[1]]){
+        if (calque[voisin[0]][voisin[1]] + 1 === calque[positionArrive[0]][positionArrive[1]]){
           posMini = voisin;
         }
         liste.push(posMini);
         positionArrive = posMini;
-    
       }
-    liste.pop();
-    let destination = liste[0];
+      
+    }
+    while (liste[liste.length-1][0] === positionDepart[0] && liste[liste.length-1][1] === positionDepart[1]) {
+      liste.pop();
+    }
+    let destination = liste[liste.length-1];
+    console.log('dep: ' + positionDepart);
+    console.log('dest: ' + destination);
     if (destination[0] < positionDepart[0]) {
+      console.log('up');
       return 0;
     }
-    if (destination[0] > positionDepart[0]) {
+    else if (destination[0] > positionDepart[0]) {
+      console.log('down');
       return 1;
     }
-    if (destination[1] < positionDepart[1]) {
+    else if (destination[1] < positionDepart[1]) {
+      console.log('left');
       return 2;
     }
-    if (destination[1] > positionDepart[1]) {
+    else if (destination[1] > positionDepart[1]) {
+      console.log('right');
       return 3;
+    }
+    else {
+      console.log('random');
+       return Math.floor(
+        Math.random() * Object.keys(MouvementDirection).length
+      );
     }
     
     
-    } 
+    
   }
 
   #changeDirection() {
