@@ -20,9 +20,15 @@
       <canvas id="gameCanvas"></canvas>
          <div>
           <div class="progress vertical">
-            <div id="progressBar" class="progress-bar bg-danger" role="progressbar" style="height: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            <div id="progressBarTemp" class="progress-bar bg-danger" role="progressbar" style="height: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <img id="imageTemperature"src="images/logoTemperature.png" alt="">
+            <img id="imageTemperature"src="images/logoTemperature.png" alt="image de thermometre">
+         </div>
+         <div id = "viscosite" style = "display: none;">
+          <div class="progress vertical">
+            <div id="progressBarViscosite" class="progress-bar bg-warning" role="progressbar" style="height: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <img id="imageViscosite"src="images/rayon-de-miel.png" alt="image de rayon de miel">
          </div>
     </div>
     <script src="src/Jeu.js" type="module"></script>

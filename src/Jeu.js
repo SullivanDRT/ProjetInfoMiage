@@ -27,6 +27,7 @@ function setNiveau(niveau) {
       rapiditer = Moyen.rapiditer;
       rapiditerEnemie = Moyen.rapiditerEnemie;
       map = Moyen.map;
+      document.getElementById("viscosite").style.display = "block";
       rapiditerBarre = Moyen.rapiditerBarre;
       break;
     case "difficile":
@@ -34,6 +35,7 @@ function setNiveau(niveau) {
       rapiditer = Difficile.rapiditer;
       rapiditerEnemie = Difficile.rapiditerEnemie;
       map = Difficile.map;
+      document.getElementById("viscosite").style.display = "block";
       rapiditerBarre = Difficile.rapiditerBarre;
       break;
   }
@@ -44,6 +46,8 @@ const chimsite = grille.getChimiste(rapiditer);
 const enemies = grille.getEnemies(rapiditerEnemie);
 const gameOverSong = new Audio("../songs/gameOver.mp3");
 let temperature = grille.creerAleatoireTemperature();
+let viscosite = grille.creerAleatoireViscosite();
+
 let joueUneFoisStp = false;
 let gameOver = false;
 let gameWin = false;
@@ -53,19 +57,28 @@ let affichage = document.getElementById("affichage");
 let chronoLance = false;
 let chrono;
 let temperatureBar
+let ViscositeBar
 
-let progressBar = document.getElementById("progressBar");
-let pourcentage = 0;
+let progressBarTemp = document.getElementById("progressBarTemp");
+let progressBarViscosite = document.getElementById("progressBarViscosite");
+let pourcentageTemp = 0;
+let pourcentageVisc = 0;
 
 function gameLoop() {
   grille.draw(ctx);
   chimsite.draw(ctx, pause());
   enemies.forEach((enemie) => enemie.draw(ctx, pause()));
   temperature.draw(ctx);
+  if(niveau === "moyen" || niveau === "difficile") {
+    viscosite.draw(ctx);
+  }
   if (!chronoLance && chimsite.premierMouvement) {
     chronoLance = true;
     chrono = setInterval(decremente, 1000);
-    temperatureBar = setInterval(miseAJourProgressBar, 1000);
+    temperatureBar = setInterval(miseAJourProgressBarTemp, 1000);
+    if(niveau === "moyen" || niveau === "difficile") {
+      ViscositeBar = setInterval(miseAJourProgressBarVisc, 500);
+    }
   }
   checkItems();
   checkReapparitionTemp();
@@ -92,6 +105,9 @@ function checkGameOver() {
     }
     clearInterval(chrono);
     clearInterval(temperatureBar);
+    if(niveau === "moyen" || niveau === "difficile") {
+    clearInterval(ViscositeBar);
+    }
     afficherDefaite();
   }
 }
@@ -101,6 +117,9 @@ function checkWin() {
     gameWin = true;
     clearInterval(chrono);
     clearInterval(temperatureBar);
+    if(niveau === "moyen" || niveau === "difficile") {
+      clearInterval(ViscositeBar);
+    }
     afficherVictoire();
   }
 }
@@ -108,19 +127,33 @@ function checkWin() {
 function checkItems() {
   if (temperature.CollisionAvecChimiste(chimsite)) {
     temperature = grille.creerAleatoireTemperature();
-    if (pourcentage < 30) {
-      console.log(pourcentage - temps.points);
-      pourcentage = 0;
+    if (pourcentageTemp < 30) {
+      console.log(pourcentageTemp - temps.points);
+      pourcentageTemp = 0;
     } else {
-      pourcentage -= 30;
+      pourcentageTemp -= 30;
     }
   }
+  if(niveau === "moyen" || niveau === "difficile") {
+    if (viscosite.CollisionAvecChimiste(chimsite)) {
+      viscosite = grille.creerAleatoireViscosite();
+      if (pourcentageTemp < 30) {
+        console.log(pourcentageVisc - temps.points);
+        pourcentageVisc = 0;
+      } else {
+        pourcentageVisc -= 30;
+      }
+    }
+
+  }
+
 }
 
 function estPerdu() {
   return (
     enemies.some((enemie) => enemie.CollisionAvecChimiste(chimsite)) ||
-    pourcentage >= 100
+    pourcentageTemp >= 100 ||
+    pourcentageVisc >= 100
   );
 }
 
@@ -129,10 +162,18 @@ function decremente() {
   affichage.innerHTML = temps;
 }
 
-function miseAJourProgressBar() {
-  pourcentage += rapiditerBarre;
-  progressBar.style.height = `${pourcentage}%`;
-  progressBar.setAttribute(`aria-valuenow`, pourcentage);
+function miseAJourProgressBarTemp() {
+  pourcentageTemp += rapiditerBarre;
+  progressBarTemp.style.height = `${pourcentageTemp}%`;
+  progressBarTemp.setAttribute(`aria-valuenow`, pourcentageTemp);
+  
+}
+
+function miseAJourProgressBarVisc() {
+  pourcentageVisc += rapiditerBarre;
+  progressBarViscosite.style.height = `${pourcentageVisc}%`;
+  progressBarViscosite.setAttribute(`aria-valuenow`, pourcentageVisc);
+  
 }
 
 function checkReapparitionTemp() {
