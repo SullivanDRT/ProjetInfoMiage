@@ -3,6 +3,7 @@ import ChangementCouleur from "./ChangementCouleur.js";
 import Dephasage from "./Dephasage.js";
 import MouvementDirection from "./MouvementDirection.js";
 import Temperature from "./Temperature.js";
+import Viscosite from "./Viscosite.js";
 
 export default class Grille {
   constructor(tailleGrille, map) {
@@ -150,6 +151,17 @@ export default class Grille {
       this
     );
     return temperature;
+  }
+  creerAleatoireViscosite() {
+    let viscosite;
+    let position = this.tirerCaseAleatoire();
+    viscosite = new Viscosite(
+      position[0] * this.tailleGrille,
+      position[1] * this.tailleGrille,
+      this.tailleGrille,
+      this
+    );
+    return viscosite;
   }
   tirerCaseAleatoire() {
     let aleatoireX = Math.floor(Math.random() * this.map.length);
