@@ -167,13 +167,10 @@ export default class Grille {
     let aleatoireX = Math.floor(Math.random() * this.map.length);
     let aleatoireY = Math.floor(Math.random() * this.map[aleatoireX].length);
 
-    console.log("valX: " + aleatoireX);
-    console.log("valY: " + aleatoireY);
 
     let tile = this.map[aleatoireX][aleatoireY];
 
     if (tile === 0) {
-      console.log("Tile trouvé: " + tile);
       return [aleatoireY, aleatoireX];
     } else {
       return this.tirerCaseAleatoire();
