@@ -12,6 +12,10 @@ export default class Chimiste {
 
     this.premierMouvement = false;
     document.addEventListener("keydown", this.#keydown);
+    let controlButtons = document.getElementsByClassName('controlButton');
+    for (let button of controlButtons) {
+      button.onclick = this.#buttonclick;
+    }
     this.#ChargeImageChimiste();
   }
 
@@ -60,6 +64,38 @@ export default class Chimiste {
     }
     // right
     if (event.keyCode == 39) {
+      if (this.mouvementDirectionActuelle == MouvementDirection.left)
+        this.mouvementDirectionActuelle = MouvementDirection.right;
+      this.requeteDirectionMouvement = MouvementDirection.right;
+      this.premierMouvement = true;
+    }
+  };
+
+  #buttonclick = (event) => {
+    let button = event.target;
+    // up
+    if (button.id === "up") {
+      if (this.mouvementDirectionActuelle == MouvementDirection.down)
+        this.mouvementDirectionActuelle = MouvementDirection.up;
+      this.requeteDirectionMouvement = MouvementDirection.up;
+      this.premierMouvement = true;
+    }
+    // down
+    if (button.id === "down") {
+      if (this.mouvementDirectionActuelle == MouvementDirection.up)
+        this.mouvementDirectionActuelle = MouvementDirection.down;
+      this.requeteDirectionMouvement = MouvementDirection.down;
+      this.premierMouvement = true;
+    }
+    // left
+    if (button.id === "left") {
+      if (this.mouvementDirectionActuelle == MouvementDirection.right)
+        this.mouvementDirectionActuelle = MouvementDirection.left;
+      this.requeteDirectionMouvement = MouvementDirection.left;
+      this.premierMouvement = true;
+    }
+    // right
+    if (button.id === "right") {
       if (this.mouvementDirectionActuelle == MouvementDirection.left)
         this.mouvementDirectionActuelle = MouvementDirection.right;
       this.requeteDirectionMouvement = MouvementDirection.right;

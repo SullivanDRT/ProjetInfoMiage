@@ -12,6 +12,9 @@ let rapiditerBarre;
 
 const niveau = localStorage.getItem("difficulter");
 setNiveau(niveau);
+if(mobilecheck()){
+  document.getElementsByClassName('controlButtons')[0].style.display = 'flex';
+}
 
 function setNiveau(niveau) {
   switch (niveau) {
@@ -128,7 +131,6 @@ function checkItems() {
   if (temperature.CollisionAvecChimiste(chimsite)) {
     temperature = grille.creerAleatoireTemperature();
     if (pourcentageTemp < 30) {
-      console.log(pourcentageTemp - temps.points);
       pourcentageTemp = 0;
     } else {
       pourcentageTemp -= 30;
@@ -138,7 +140,6 @@ function checkItems() {
     if (viscosite.CollisionAvecChimiste(chimsite)) {
       viscosite = grille.creerAleatoireViscosite();
       if (pourcentageTemp < 30) {
-        console.log(pourcentageVisc - temps.points);
         pourcentageVisc = 0;
       } else {
         pourcentageVisc -= 30;
@@ -181,3 +182,8 @@ function checkReapparitionTemp() {
     temperature = grille.creerAleatoireTemperature();
   }
 }
+
+
+function mobilecheck() {
+  return document.getElementsByTagName('html')[0].clientHeight < 500;
+};

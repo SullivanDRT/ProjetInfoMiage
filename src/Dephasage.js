@@ -103,26 +103,19 @@ export default class Dephasage {
       liste.pop();
     }
     let destination = liste[liste.length-1];
-    console.log('dep: ' + positionDepart);
-    console.log('dest: ' + destination);
     if (destination[0] < positionDepart[0]) {
-      console.log('up');
       return 0;
     }
     else if (destination[0] > positionDepart[0]) {
-      console.log('down');
       return 1;
     }
     else if (destination[1] < positionDepart[1]) {
-      console.log('left');
       return 2;
     }
     else if (destination[1] > positionDepart[1]) {
-      console.log('right');
       return 3;
     }
     else {
-      console.log('random');
        return Math.floor(
         Math.random() * Object.keys(MouvementDirection).length
       );
