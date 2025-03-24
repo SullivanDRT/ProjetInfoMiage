@@ -1,21 +1,27 @@
 import Chimiste from "./Chimiste.js";
-import Enemie from "./Enemies.js";
+import ChangementCouleur from "./ChangementCouleur.js";
+import Dephasage from "./Dephasage.js";
 import MouvementDirection from "./MouvementDirection.js";
+import Temperature from "./Temperature.js";
+import Viscosite from "./Viscosite.js";
 
 export default class Grille {
-  constructor(tailleGrille) {
+  constructor(tailleGrille, map) {
+    this.map = map;
     this.tailleGrille = tailleGrille;
     this.temperature = new Image();
-    this.temperature.src = "../images/temperature.png";
+    this.temperature.src = "../images/logoTemperature.png";
 
     this.viscosite = new Image();
     this.viscosite.src = "../images/rayon-de-miel.png";
 
     this.mur = new Image();
-    this.mur.src = "../images/mur.png";
+    this.mur.src = "../images/mur2.png";
 
     this.caseVide = new Image();
-    this.caseVide.src = "../images/map/color.png";
+    this.caseVide.src = "../images/case2.png";
+
+    this.chimiste = null;
   }
 
   //1 mur
@@ -24,21 +30,6 @@ export default class Grille {
   // 3 viscocite
   // 4 chimiste
   // 6 enemies
-
-  map = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 1, 4, 0, 0, 1, 0, 0, 0, 1],
-    [1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
-    [1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
-    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 6, 0, 0, 0, 0, 6, 0, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-]
-
 
   draw(ctx) {
     for (let ligne = 0; ligne < this.map.length; ligne++) {
@@ -82,30 +73,33 @@ export default class Grille {
     canvas.height = this.map.length * this.tailleGrille;
   }
   getChimiste(rapiditer) {
-    for (let ligne = 0; ligne < this.map.length; ligne++) {
-      for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
-        let tile = this.map[ligne][colonne];
-        if (tile === 4) {
-          this.map[ligne][colonne] = 0;
-          return new Chimiste(
-            colonne * this.tailleGrille,
-            ligne * this.tailleGrille,
-            this.tailleGrille,
-            rapiditer,
-            this
-          );
+    if(this.chimiste === null) {
+      for (let ligne = 0; ligne < this.map.length; ligne++) {
+        for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
+          let tile = this.map[ligne][colonne];
+          if (tile === 4) {
+            this.map[ligne][colonne] = 0;
+            this.chimiste =  new Chimiste(
+              colonne * this.tailleGrille,
+              ligne * this.tailleGrille,
+              this.tailleGrille,
+              rapiditer,
+              this
+            );
+          }
         }
       }
     }
+    return this.chimiste;
   }
-  getEnemies(rapiditer){
+  getEnemies(rapiditer) {
     const enemies = [];
     for (let ligne = 0; ligne < this.map.length; ligne++) {
       for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
         let tile = this.map[ligne][colonne];
         if (tile === 6) {
           this.map[ligne][colonne] = 0;
-          enemies.push(new Enemie(
+          enemies.push(new ChangementCouleur(
             colonne * this.tailleGrille,
             ligne * this.tailleGrille,
             this.tailleGrille,
@@ -113,11 +107,74 @@ export default class Grille {
             this
           ));
         }
+        if (tile === 7) {
+          this.map[ligne][colonne] = 0;
+          enemies.push(new Dephasage(
+            colonne * this.tailleGrille,
+            ligne * this.tailleGrille,
+            this.tailleGrille,
+            rapiditer,
+            this
+          ));
+
+        }
       }
     }
-    console.log(enemies);
     return enemies;
+  }
+  getTemperature() {
+    const temperature = [];
+    for (let ligne = 0; ligne < this.map.length; ligne++) {
+      for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
+        let tile = this.map[ligne][colonne];
+        if (tile === 2) {
+          this.map[ligne][colonne] = 0;
+          temperature.push(
+            new Temperature(
+              colonne * this.tailleGrille,
+              ligne * this.tailleGrille,
+              this.tailleGrille,
+              this
+            )
+          );
+        }
+      }
+    }
+  }
+  creerAleatoireTemperature() {
+    let temperature;
+    let position = this.tirerCaseAleatoire();
+    temperature = new Temperature(
+      position[0] * this.tailleGrille,
+      position[1] * this.tailleGrille,
+      this.tailleGrille,
+      this
+    );
+    return temperature;
+  }
+  creerAleatoireViscosite() {
+    let viscosite;
+    let position = this.tirerCaseAleatoire();
+    viscosite = new Viscosite(
+      position[0] * this.tailleGrille,
+      position[1] * this.tailleGrille,
+      this.tailleGrille,
+      this
+    );
+    return viscosite;
+  }
+  tirerCaseAleatoire() {
+    let aleatoireX = Math.floor(Math.random() * this.map.length);
+    let aleatoireY = Math.floor(Math.random() * this.map[aleatoireX].length);
 
+
+    let tile = this.map[aleatoireX][aleatoireY];
+
+    if (tile === 0) {
+      return [aleatoireY, aleatoireX];
+    } else {
+      return this.tirerCaseAleatoire();
+    }
   }
   CollisionEnvironnement(x, y, direction) {
     if (
@@ -157,5 +214,4 @@ export default class Grille {
     }
     return false;
   }
-
 }

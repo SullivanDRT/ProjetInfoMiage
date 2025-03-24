@@ -9,12 +9,20 @@ export default class Chimiste {
     this.grille = grille;
     this.mouvementDirectionActuelle = null;
     this.requeteDirectionMouvement = null;
+
+    this.premierMouvement = false;
     document.addEventListener("keydown", this.#keydown);
+    let controlButtons = document.getElementsByClassName('controlButton');
+    for (let button of controlButtons) {
+      button.onclick = this.#buttonclick;
+    }
     this.#ChargeImageChimiste();
   }
 
-  draw(ctx) {
-    this.#mouvement();
+  draw(ctx, pause) {
+    if (!pause) {
+      this.#mouvement();
+    }
     ctx.drawImage(
       this.packChimisteImage[this.packChimisteImageIndex],
       this.x,
@@ -25,7 +33,7 @@ export default class Chimiste {
   }
   #ChargeImageChimiste() {
     const chimisteImage1 = new Image();
-    chimisteImage1.src = "../images/chimiste3.png";
+    chimisteImage1.src = "../images/personnage2.png";
     // le reste des images
     this.packChimisteImage = [chimisteImage1];
 
@@ -38,32 +46,73 @@ export default class Chimiste {
       if (this.mouvementDirectionActuelle == MouvementDirection.down)
         this.mouvementDirectionActuelle = MouvementDirection.up;
       this.requeteDirectionMouvement = MouvementDirection.up;
+      this.premierMouvement = true;
     }
     // down
     if (event.keyCode == 40) {
       if (this.mouvementDirectionActuelle == MouvementDirection.up)
         this.mouvementDirectionActuelle = MouvementDirection.down;
       this.requeteDirectionMouvement = MouvementDirection.down;
+      this.premierMouvement = true;
     }
     // left
     if (event.keyCode == 37) {
       if (this.mouvementDirectionActuelle == MouvementDirection.right)
         this.mouvementDirectionActuelle = MouvementDirection.left;
       this.requeteDirectionMouvement = MouvementDirection.left;
+      this.premierMouvement = true;
     }
     // right
     if (event.keyCode == 39) {
       if (this.mouvementDirectionActuelle == MouvementDirection.left)
         this.mouvementDirectionActuelle = MouvementDirection.right;
       this.requeteDirectionMouvement = MouvementDirection.right;
+      this.premierMouvement = true;
     }
   };
 
+  #buttonclick = (event) => {
+    let button = event.target;
+    // up
+    if (button.id === "up") {
+      if (this.mouvementDirectionActuelle == MouvementDirection.down)
+        this.mouvementDirectionActuelle = MouvementDirection.up;
+      this.requeteDirectionMouvement = MouvementDirection.up;
+      this.premierMouvement = true;
+    }
+    // down
+    if (button.id === "down") {
+      if (this.mouvementDirectionActuelle == MouvementDirection.up)
+        this.mouvementDirectionActuelle = MouvementDirection.down;
+      this.requeteDirectionMouvement = MouvementDirection.down;
+      this.premierMouvement = true;
+    }
+    // left
+    if (button.id === "left") {
+      if (this.mouvementDirectionActuelle == MouvementDirection.right)
+        this.mouvementDirectionActuelle = MouvementDirection.left;
+      this.requeteDirectionMouvement = MouvementDirection.left;
+      this.premierMouvement = true;
+    }
+    // right
+    if (button.id === "right") {
+      if (this.mouvementDirectionActuelle == MouvementDirection.left)
+        this.mouvementDirectionActuelle = MouvementDirection.right;
+      this.requeteDirectionMouvement = MouvementDirection.right;
+      this.premierMouvement = true;
+    }
+  };
+
+  getPositionChimiste(){
+    return [this.y / this.tailleGrille, this.x/this.tailleGrille];
+  }
+
   #mouvement() {
+    const posChimiste = this.getPositionChimiste();
     if (this.mouvementDirectionActuelle !== this.requeteDirectionMouvement) {
       if (
-        Number.isInteger(this.x / this.tailleGrille) &&
-        Number.isInteger(this.y / this.tailleGrille)
+        Number.isInteger(posChimiste[0]) &&
+        Number.isInteger(posChimiste[1])
       ) {
         if (
           !this.grille.CollisionEnvironnement(
