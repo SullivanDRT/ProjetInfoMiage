@@ -33,28 +33,6 @@ header {
   transition: height 0.6s ease;
 }
 
-@media (max-width: 768px) {
-  #gameCanvas {
-    width: 100vw;
-    height: 50vh;
-  }
-
-  .progress.vertical {
-    height: 200px;
-  }
-}
-
-@media (max-width: 480px) {
-  #gameCanvas {
-    width: 100vw;
-    height: 40vh;
-  }
-
-  .progress.vertical {
-    height: 150px;
-  }
-}
-
 #imageTemperature{
   max-width: 30px;
   margin-left: 20px;
