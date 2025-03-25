@@ -12,11 +12,8 @@ let rapiditerBarre;
 
 const niveau = localStorage.getItem("difficulter");
 setNiveau(niveau);
-if(mobilecheck()){
-  document.getElementsByClassName('controlButtons')[0].style.display = 'flex';
-  canvas.style.height = "500px";
-  canvas.style.width = "auto";
-}
+
+
 
 function setNiveau(niveau) {
   switch (niveau) {
@@ -184,8 +181,3 @@ function checkReapparitionTemp() {
     temperature = grille.creerAleatoireTemperature();
   }
 }
-
-
-function mobilecheck() {
-  return document.getElementsByTagName('html')[0].clientHeight < 900 || document.getElementsByTagName('html')[0].clientWidth < 900;
-};
