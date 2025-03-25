@@ -14,7 +14,7 @@ const niveau = localStorage.getItem("difficulter");
 setNiveau(niveau);
 if(mobilecheck()){
   document.getElementsByClassName('controlButtons')[0].style.display = 'flex';
-  canvas.style.height = "350px";
+  canvas.style.height = "500px";
   canvas.style.width = "auto";
 }
 
@@ -187,5 +187,5 @@ function checkReapparitionTemp() {
 
 
 function mobilecheck() {
-  return document.getElementsByTagName('html')[0].clientHeight < 500 || document.getElementsByTagName('html')[0].clientWidth < 500;
+  return document.getElementsByTagName('html')[0].clientHeight < 900 || document.getElementsByTagName('html')[0].clientWidth < 900;
 };
