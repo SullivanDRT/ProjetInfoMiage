@@ -32,7 +32,7 @@ export default class ChangementCouleur {
     const taille = this.tailleGrille / 2;
     if (
       this.x < chimsite.x + taille &&
-      this.x + taille> chimsite.x &&
+      this.x + taille > chimsite.x &&
       this.y < chimsite.y + taille &&
       this.y + taille > chimsite.y
     ) {
@@ -64,7 +64,7 @@ export default class ChangementCouleur {
       }
     }
   }
-  
+
 
   #changeDirection() {
     this.directionTemps--;

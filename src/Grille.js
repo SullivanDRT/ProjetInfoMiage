@@ -73,13 +73,13 @@ export default class Grille {
     canvas.height = this.map.length * this.tailleGrille;
   }
   getChimiste(rapiditer) {
-    if(this.chimiste === null) {
+    if (this.chimiste === null) {
       for (let ligne = 0; ligne < this.map.length; ligne++) {
         for (let colonne = 0; colonne < this.map[ligne].length; colonne++) {
           let tile = this.map[ligne][colonne];
           if (tile === 4) {
             this.map[ligne][colonne] = 0;
-            this.chimiste =  new Chimiste(
+            this.chimiste = new Chimiste(
               colonne * this.tailleGrille,
               ligne * this.tailleGrille,
               this.tailleGrille,

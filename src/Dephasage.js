@@ -32,7 +32,7 @@ export default class Dephasage {
     const taille = this.tailleGrille / 2;
     if (
       this.x < chimsite.x + taille &&
-      this.x + taille> chimsite.x &&
+      this.x + taille > chimsite.x &&
       this.y < chimsite.y + taille &&
       this.y + taille > chimsite.y
     ) {
@@ -65,16 +65,16 @@ export default class Dephasage {
     }
   }
 
-  getnbCaseCouloirAdjacente(){
+  getnbCaseCouloirAdjacente() {
     let nbCaseCouloirAdjacente = 0;
-    for ( let direction of Object.values(MouvementDirection)) {
-        if (!this.grilleMap.CollisionEnvironnement(
-          this.x,
-          this.y,
-          direction
-        )) {
-          nbCaseCouloirAdjacente ++;
-        }
+    for (let direction of Object.values(MouvementDirection)) {
+      if (!this.grilleMap.CollisionEnvironnement(
+        this.x,
+        this.y,
+        direction
+      )) {
+        nbCaseCouloirAdjacente++;
+      }
     }
     return nbCaseCouloirAdjacente;
   }
@@ -84,25 +84,25 @@ export default class Dephasage {
     let liste = [positionArrive];
     let positionDepart = [this.y / this.tailleGrille, this.x / this.tailleGrille];
     let calque = PlusCourtChemin.creationCalque(this.grilleMap.map, positionDepart);
-    if (calque[positionArrive[0]][positionArrive[1]] === -1){
+    if (calque[positionArrive[0]][positionArrive[1]] === -1) {
       return [];
     }
     while (calque[positionArrive[0]][positionArrive[1]] !== 0) {
       let posMini = positionArrive;
       let voisins = PlusCourtChemin.getVoisins(calque, positionArrive[0], positionArrive[1], -1);
       for (let voisin of voisins) {
-        if (calque[voisin[0]][voisin[1]] + 1 === calque[positionArrive[0]][positionArrive[1]]){
+        if (calque[voisin[0]][voisin[1]] + 1 === calque[positionArrive[0]][positionArrive[1]]) {
           posMini = voisin;
         }
         liste.push(posMini);
         positionArrive = posMini;
       }
-      
+
     }
-    while (liste[liste.length-1][0] === positionDepart[0] && liste[liste.length-1][1] === positionDepart[1]) {
+    while (liste[liste.length - 1][0] === positionDepart[0] && liste[liste.length - 1][1] === positionDepart[1]) {
       liste.pop();
     }
-    let destination = liste[liste.length-1];
+    let destination = liste[liste.length - 1];
     if (destination[0] < positionDepart[0]) {
       return 0;
     }
@@ -116,36 +116,36 @@ export default class Dephasage {
       return 3;
     }
     else {
-       return Math.floor(
+      return Math.floor(
         Math.random() * Object.keys(MouvementDirection).length
       );
     }
-    
-    
-    
+
+
+
   }
 
   #changeDirection() {
     this.directionTemps--;
-    if(
+    if (
       Number.isInteger(this.x / this.tailleGrille) &&
       Number.isInteger(this.y / this.tailleGrille)
     ) {
-        if(
-          this.getnbCaseCouloirAdjacente() >= 3 ||
-           this.grilleMap.CollisionEnvironnement(this.x, this.y, this.mouvementDirection) 
-          ) {
-            let posChimiste = this.grilleMap.getChimiste(2).getPositionChimiste();
-            if(
-              !(Number.isInteger(posChimiste) &&
-              Number.isInteger(posChimiste))
-            ) {
-                posChimiste[0] = parseInt(posChimiste[0]);
-                posChimiste[1] = parseInt(posChimiste[1]);
-            }
+      if (
+        this.getnbCaseCouloirAdjacente() >= 3 ||
+        this.grilleMap.CollisionEnvironnement(this.x, this.y, this.mouvementDirection)
+      ) {
+        let posChimiste = this.grilleMap.getChimiste(2).getPositionChimiste();
+        if (
+          !(Number.isInteger(posChimiste) &&
+            Number.isInteger(posChimiste))
+        ) {
+          posChimiste[0] = parseInt(posChimiste[0]);
+          posChimiste[1] = parseInt(posChimiste[1]);
+        }
 
-            this.mouvementDirection = this.getDirectionVersChimiste(posChimiste);
-          }
+        this.mouvementDirection = this.getDirectionVersChimiste(posChimiste);
+      }
     }
   }
 
