@@ -103,8 +103,8 @@ export default class Chimiste {
     }
   };
 
-  getPositionChimiste(){
-    return [this.y / this.tailleGrille, this.x/this.tailleGrille];
+  getPositionChimiste() {
+    return [this.y / this.tailleGrille, this.x / this.tailleGrille];
   }
 
   #mouvement() {

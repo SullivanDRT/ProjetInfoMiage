@@ -71,14 +71,14 @@ function gameLoop() {
   chimsite.draw(ctx, pause());
   enemies.forEach((enemie) => enemie.draw(ctx, pause()));
   temperature.draw(ctx);
-  if(niveau === "moyen" || niveau === "difficile") {
+  if (niveau === "moyen" || niveau === "difficile") {
     viscosite.draw(ctx);
   }
   if (!chronoLance && chimsite.premierMouvement) {
     chronoLance = true;
     chrono = setInterval(decremente, 1000);
     temperatureBar = setInterval(miseAJourProgressBarTemp, 1000);
-    if(niveau === "moyen" || niveau === "difficile") {
+    if (niveau === "moyen" || niveau === "difficile") {
       ViscositeBar = setInterval(miseAJourProgressBarVisc, 500);
     }
   }
@@ -107,8 +107,8 @@ function checkGameOver() {
     }
     clearInterval(chrono);
     clearInterval(temperatureBar);
-    if(niveau === "moyen" || niveau === "difficile") {
-    clearInterval(ViscositeBar);
+    if (niveau === "moyen" || niveau === "difficile") {
+      clearInterval(ViscositeBar);
     }
     afficherDefaite();
   }
@@ -119,7 +119,7 @@ function checkWin() {
     gameWin = true;
     clearInterval(chrono);
     clearInterval(temperatureBar);
-    if(niveau === "moyen" || niveau === "difficile") {
+    if (niveau === "moyen" || niveau === "difficile") {
       clearInterval(ViscositeBar);
     }
     afficherVictoire();
@@ -135,7 +135,7 @@ function checkItems() {
       pourcentageTemp -= 30;
     }
   }
-  if(niveau === "moyen" || niveau === "difficile") {
+  if (niveau === "moyen" || niveau === "difficile") {
     if (viscosite.CollisionAvecChimiste(chimsite)) {
       viscosite = grille.creerAleatoireViscosite();
       if (pourcentageTemp < 30) {
@@ -166,14 +166,14 @@ function miseAJourProgressBarTemp() {
   pourcentageTemp += rapiditerBarre;
   progressBarTemp.style.height = `${pourcentageTemp}%`;
   progressBarTemp.setAttribute(`aria-valuenow`, pourcentageTemp);
-  
+
 }
 
 function miseAJourProgressBarVisc() {
   pourcentageVisc += rapiditerBarre;
   progressBarViscosite.style.height = `${pourcentageVisc}%`;
   progressBarViscosite.setAttribute(`aria-valuenow`, pourcentageVisc);
-  
+
 }
 
 function checkReapparitionTemp() {
