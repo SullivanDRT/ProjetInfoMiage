@@ -1,12 +1,30 @@
-# Projet Info Miage
+# Guide d'utilisation
+## Lancer le projet
 
-Utiliser Extension Live Serveur pour charger fichier javascript
+### Pour la première fois
+Allez à la racine du projet et lancez la commande suivante:
 
+```bash
+docker-compose up
+```
 
-# LIEN A FAIRE POUR PROCHAINE ETAPE :
+### Pour les fois suivantes
 
-Dans le fichier Jeux.html
-ligne 65 : Button Prohaine Etape Mettre lien
+Lancez la commande suivante:
 
+```bash
+docker start server-web-petit-chimiste
+```
 
- 
+## Arreter le serveur 
+
+Lancez la commande suivante:
+
+```bash
+docker stop server-web-petit-chimiste
+```
+# Crédits
+- DEMARET Sullivan, sullivan.demaret@etu.univ-orleans.fr
+- FOUCHER Thomas, thomas.foucher1@etu.univ-orleans.fr
+- ABHARI Nisrine, nisrine.abhari@etu.univ-orleans.fr
+- SUKIENNIK Zineb, zineb.sukiennik@etu.univ-orleans.fr
