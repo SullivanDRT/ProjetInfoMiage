@@ -28,4 +28,3 @@ docker stop server-web-petit-chimiste
 - FOUCHER Thomas, thomas.foucher1@etu.univ-orleans.fr
 - ABHARI Nisrine, nisrine.abhari@etu.univ-orleans.fr
 - SUKIENNIK Zineb, zineb.sukiennik@etu.univ-orleans.fr
-
